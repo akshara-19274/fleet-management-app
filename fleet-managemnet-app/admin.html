@@ -24,10 +24,41 @@
     </div>
     <div class="layout">
         <aside class="sidebar">
-            <h3>Vehicle Details</h3>
-            
+            <h3>Add fleet</h3>
+            <input type="text"id="regnumber" placeholder="Enter Registration Number"><br>
+            <select id="category">
+                <option value="Auto">Auto</option>
+            <option value="Car">Car</option>
+            <option value="Truck">Truck</option>
+            <option value="Bus">Bus</option>
+            </select><br>
+            <input id="dname" type="text" placeholder="Enter Driver Name"><br>
+            <select id="availability">
+                <option value="available">Available</option>
+                <option value="unavailable">Unavailable</option>
+            </select><br>
+            <button id="addfleet" onclick="f()">Add Fleet</button>
         </aside>
-
     </div>
 </body>
+<script>
+    function f(){
+        let url="https://coding-platform.s3.amazonaws.com/dev/lms/tickets/5e80fcb6-3f8e-480c-945b-30a5359eb40e/JNmYjkVr3WOjsrbu.png"
+        let regnumber=document.getElementById("regnumber").value;
+        let category=document.getElementById("category").value;
+        let drivername=document.getElementById("dname").value;
+        let availability=document.getElementById("availability").value;
+        let fleet={
+            "rnumber":regnumber,
+            "category":category,
+            "dname":drivername,
+            "availability":availability,
+        };
+        fleetdata.push(fleet)
+        documnet.getElementById("regnumber").value="";
+        documnet.getElementById("category").value="";
+        document.getElementById("dname").value="";
+        document.getElementById("availability").value="";
+    }
+</script>
 </html>
