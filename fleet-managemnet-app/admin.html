@@ -6,24 +6,24 @@
     <title>Document</title>
 </head>
 <body>
-    <div class="navbar">
+    <div class="navbar" style="padding:10px; border-bottom:1px solid black;">
         <h2>Admin Dashboard</h2>
-        <select id="filtercategory">
+        <select id="filtercategory"onchange="showfleet()">
             <option value="All">ALL</option>
             <option value="Auto">Auto</option>
             <option value="Car">Car</option>
             <option value="Truck">Truck</option>
             <option value="Bus">Bus</option>
         </select>
-        <select id="fileravailability">
+        <select id="filteravailability" onchange="showfleet()">
             <option value="All">ALL</option>
             <option value="Available">Available</option>
             <option value="Unavailable">Unavailable</option>
         </select>
         <button id="clearfilter" onclick="clearfilter()">Clear Filter</button>
     </div>
-    <div class="layout">
-        <aside class="sidebar">
+    <div class="layout" style="display:flex; gap:20px;padding: 20px;">
+        <aside class="sidebar" style="width: 250px;border:1px solid black; padding:10px;">
             <h3>Add fleet</h3>
             <input type="text"id="regnumber" placeholder="Enter Registration Number"><br>
             <select id="category">
@@ -34,8 +34,8 @@
             </select><br>
             <input id="dname" type="text" placeholder="Enter Driver Name"><br>
             <select id="availability">
-                <option value="available">Available</option>
-                <option value="unavailable">Unavailable</option>
+                <option value="Available">Available</option>
+                <option value="Unavailable">Unavailable</option>
             </select><br>
             <button id="addfleet" onclick="addfleet()">Add Fleet</button>
         </aside>
@@ -65,8 +65,11 @@
     function showfleet(){
         let container =document.getElementById("container");
         container.innerHTML="";
+        container.style.display="flex";
+        container.style.flexWrap="wrap";
+        container.style.gap="10px";
         let catFilter=document.getElementById("filtercategory").value;
-        let availFilter=document.getElementById("fileravailability").value;
+        let availFilter=document.getElementById("filteravailability").value;
         let filtered=fleetdata.filter(f=>{
             return (catFilter=="All" || f.category==catFilter) && (availFilter=="All" || f.availability==availFilter);
         });
@@ -75,7 +78,9 @@
             card.style.border="1px solid black";
             card.style.margin="10px";
             card.style.padding="10px";
+            card.style.width="250px";
             card.innerHTML=`
+            <img src="https://coding-platform.s3.amazonaws.com/dev/lms/tickets/5e80fcb6-3f8e-480c-945b-30a5359eb40e/JNmYjkVr3WOjsrbu.png" alt="Fleet Image" style="width:100%";height:auto;><br>
             <p>Registration Number: ${f.rnumber}</p>
             <p>Category: ${f.category}</p>
             <p>Driver Name: ${f.dname}</p>
@@ -108,7 +113,7 @@
     }
     function clearfilter(){
         document.getElementById("filtercategory").value="All";
-        document.getElementById("fileravailability").value="All";
+        document.getElementById("filteravailability").value="All";
         showfleet();
     }
 </script>
